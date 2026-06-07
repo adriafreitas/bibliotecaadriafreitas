@@ -67,7 +67,7 @@ const [observacoesAutora, setObservacoesAutora] = useState("");
 }
   }
 
-  async function salvar() {s
+  async function salvar() {
     const { error } = await supabase
       .from("characters")
       .update({

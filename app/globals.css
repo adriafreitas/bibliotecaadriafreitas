@@ -1,8 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background: #f7f2e8;
-  color: #22324a;
+  background: #0f172a;
+  color: #f8fafc;
   font-family: Georgia, serif;
 }
 
@@ -16,9 +16,10 @@ textarea,
 select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #d8c9a8;
+  border: 1px solid #334155;
   border-radius: 12px;
-  background: #fff;
+  background: #1e293b;
+  color: #f8fafc;
   box-sizing: border-box;
   font-size: 15px;
 }
@@ -26,12 +27,12 @@ select {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #c79b3b;
+  border-color: #d4af37;
 }
 
 button {
-  background: #d97706;
-  color: white;
+  background: #d4af37;
+  color: #0f172a;
   border: none;
   padding: 14px 22px;
   border-radius: 12px;
@@ -44,21 +45,21 @@ button:hover {
 }
 
 h1 {
-  color: #22324a;
+  color: #f8fafc;
 }
 
 h2 {
-  color: #22324a;
+  color: #f8fafc;
   border-bottom: 2px solid #d4af37;
   padding-bottom: 6px;
   margin-top: 30px;
 }
 
 a {
-  color: #22324a;
+  color: #d4af37;
   text-decoration: none;
 }
 
 a:hover {
-  color: #d97706;
+  color: #f8fafc;
 }
