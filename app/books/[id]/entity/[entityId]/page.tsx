@@ -8,7 +8,7 @@ export default async function EntityPage({
     entityId: string;
   }>;
 }) {
-  const { entityId } = await params;
+const { id, entityId } = await params;
 
   const { data: entity } = await supabase
     .from("entities")
@@ -37,20 +37,34 @@ export default async function EntityPage({
   }}
 >
   <a
-  href={`/books/${(await params).id}/entities`}
-  style={{
-    background: "#374151",
-    color: "#fff",
-    padding: "12px 20px",
-    borderRadius: "10px",
-    textDecoration: "none",
-    fontWeight: "bold",
-    display: "inline-block",
-    marginBottom: "30px",
-  }}
->
-  ⬅ Voltar
-</a>
+    href={`/books/${id}/entities`}
+    style={{
+      background: "#d6d077",
+      color: "#000000",
+      padding: "14px 24px",
+      borderRadius: "12px",
+      textDecoration: "none",
+      fontWeight: "bold",
+      fontSize: "18px",
+    }}
+  >
+    ⬅ Voltar
+  </a>
+
+  <a
+    href={`/books/${id}/entity/${entity.id}/edit`}
+    style={{
+      background: "#d4af37",
+      color: "#111827",
+      padding: "14px 24px",
+      borderRadius: "12px",
+      textDecoration: "none",
+      fontWeight: "bold",
+      fontSize: "18px",
+    }}
+  >
+    ✏️ Editar
+  </a>
 </div>
 
       <div
