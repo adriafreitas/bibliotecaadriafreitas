@@ -32,7 +32,10 @@ const [objetivoHistoria, setObjetivoHistoria] = useState("");
 const [destinoPlanejado, setDestinoPlanejado] = useState("");
 const [nuncaDeveAcontecer, setNuncaDeveAcontecer] = useState("");
 const [observacoesAutora, setObservacoesAutora] = useState("");
+const [personagensParecidos,
 
+  setPersonagensParecidos] =
+  useState<any[]>([]);
   useEffect(() => {
     carregarPersonagem();
   }, []);
@@ -64,6 +67,7 @@ const [observacoesAutora, setObservacoesAutora] = useState("");
   setDestinoPlanejado(data.destino_planejado || "");
   setNuncaDeveAcontecer(data.nunca_deve_acontecer || "");
   setObservacoesAutora(data.observacoes_autora || "");
+  setPersonagensParecidos(data.personagens_parecidos || []);
 }
   }
 
@@ -107,7 +111,7 @@ const [observacoesAutora, setObservacoesAutora] = useState("");
     );
   }
 
-  return (
+ return (
   <main
     style={{
       padding: "40px",
@@ -126,6 +130,18 @@ const [observacoesAutora, setObservacoesAutora] = useState("");
       ✏️ Editar Personagem
     </h1>
 
+    <div
+      style={{
+        display: "flex",
+        gap: "10px",
+        flexWrap: "wrap",
+        marginTop: "20px",
+        marginBottom: "30px",
+      }}
+    >
+      ...
+    </div>
+    
     <h2>👤 Dados Básicos</h2>
 
     <input
@@ -305,9 +321,45 @@ const [observacoesAutora, setObservacoesAutora] = useState("");
     marginBottom: "20px",
   }}
 />
+{personagensParecidos.length >
+  0 && (
+  <>
+    <h2>
+      📚 Personagens Encontrados
+    </h2>
+
+    {personagensParecidos.map(
+      (personagem) => (
+        <div
+          key={personagem.id}
+          style={{
+            padding: "12px",
+            border:
+              "1px solid #d4af37",
+            marginBottom: "10px",
+            borderRadius: "10px",
+          }}
+        >
+          <strong>
+            {
+              personagem.nome_completo
+            }
+          </strong>
+
+          <br />
+
+          ID: {personagem.id}
+        </div>
+      )
+    )}
+  </>
+)}
+
+<br />
+
       <button onClick={salvar}>
         💾 Salvar Alterações
       </button>
     </main>
   );
-}
+}''

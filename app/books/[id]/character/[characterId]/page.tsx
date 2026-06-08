@@ -21,69 +21,468 @@ export default async function CharacterPage({
   }
 
   return (
-    <main style={{ padding: "40px" }}>
-        
-    <div style={{ marginBottom: "20px" }}>
-      <a href={`/books/${character.book_id}`}>
-        ⬅ Voltar para o Livro
-      </a>
-    </div>
-
-    <div style={{ marginBottom: "20px" }}>
-      <a
-        href={`/books/${character.book_id}/character/${character.id}/edit`}
+  <main
+    style={{
+      minHeight: "100vh",
+      background: "#0f172a",
+      padding: "40px",
+      fontFamily: "Arial, sans-serif",
+    }}
+  >
+    <div
+      style={{
+        maxWidth: "1400px",
+        margin: "0 auto",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: "15px",
+          marginBottom: "25px",
+        }}
       >
-        ✏️ Editar Personagem
-      </a>
-    </div>
-      <h1>👤 {character.nome_completo}</h1>
+        <a
+          href={`/books/${character.book_id}`}
+          style={{
+            color: "#d4af37",
+          }}
+        >
+          ⬅ Voltar
+        </a>
 
-      <p><strong>Apelido:</strong> {character.apelido}</p>
+        <a
+          href={`/books/${character.book_id}/character/${character.id}/edit`}
+          style={{
+            color: "#d4af37",
+          }}
+        >
+          ✏️ Editar
+        </a>
+      </div>
 
-      <p><strong>Idade:</strong> {character.idade}</p>
+      <div
+        style={{
+          background:
+            "linear-gradient(180deg,#1b2540,#111827)",
+          border:
+            "1px solid rgba(212,175,55,.25)",
+          borderRadius: "25px",
+          padding: "30px",
+          marginBottom: "30px",
+          color: "#fff",
+        }}
+      >
+        <h1
+          style={{
+            color: "#d4af37",
+            fontSize: "42px",
+            marginBottom: "15px",
+          }}
+        >
+          👤 {character.nome_completo}
+        </h1>
 
-      <p><strong>Gênero:</strong> {character.genero}</p>
+        <div
+          style={{
+            display: "flex",
+            gap: "25px",
+            flexWrap: "wrap",
+            fontSize: "16px",
+          }}
+        >
+          <span>
+            📍 {character.pais_origem}
+          </span>
 
-      <p><strong>País:</strong> {character.pais_origem}</p>
+          <span>
+            🏙 {character.cidade_origem}
+          </span>
 
-      <p><strong>Cidade:</strong> {character.cidade_origem}</p>
+          <span>
+            ⚔ {character.profissao}
+          </span>
 
-      <p><strong>Profissão:</strong> {character.profissao}</p>
+          <span>
+            🎂 {character.idade}
+          </span>
+        </div>
+      </div>
 
-      <hr />
+      <div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit,minmax(400px,1fr))",
+    gap: "20px",
+    marginBottom: "30px",
+  }}
+>
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      ✨ Aparência
+    </h2>
 
-      <h2>Aparência</h2>
-      <p>{character.aparencia}</p>
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.aparencia}
+    </p>
+  </div>
 
-      <h2>Personalidade</h2>
-      <p>{character.personalidade}</p>
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      🧠 Personalidade
+    </h2>
 
-      <h2>História</h2>
-      <p>{character.historia}</p>
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.personalidade}
+    </p>
+  </div>
+</div>
+      <div
+  style={{
+    background:
+      "linear-gradient(180deg,#1b2540,#111827)",
+    border:
+      "1px solid rgba(212,175,55,.25)",
+    borderRadius: "20px",
+    padding: "25px",
+    marginBottom: "25px",
+    color: "#fff",
+  }}
+>
+  <h2
+    style={{
+      color: "#d4af37",
+      marginBottom: "15px",
+    }}
+  >
+    📖 História
+  </h2>
 
-      <h2>Família</h2>
-      <p>{character.familia}</p>
+  <p
+    style={{
+      lineHeight: "1.8",
+      fontSize: "16px",
+    }}
+  >
+    {character.historia}
+  </p>
+</div>
 
-      <h2>Relacionamentos</h2>
-      <p>{character.relacionamentos}</p>
+      <div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit,minmax(400px,1fr))",
+    gap: "20px",
+    marginBottom: "30px",
+  }}
+>
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      ❤️ Família
+    </h2>
 
-      <h2>Segredos</h2>
-      <p>{character.segredos}</p>
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.familia}
+    </p>
+  </div>
 
-      <h2>Ligação Espiritual</h2>
-      <p>{character.ligacao_espiritual}</p>
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      ❤️ Relacionamentos
+    </h2>
 
-      <h2>Objetivo na História</h2>
-      <p>{character.objetivo_historia}</p>
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.relacionamentos}
+    </p>
+  </div>
+</div>
 
-      <h2>Nunca Deve Acontecer</h2>
-      <p>{character.nunca_deve_acontecer}</p>
+      <div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit,minmax(400px,1fr))",
+    gap: "20px",
+    marginBottom: "30px",
+  }}
+>
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      🔐 Segredos
+    </h2>
 
-      <h2>Destino Planejado</h2>
-      <p>{character.destino_planejado}</p>
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.segredos}
+    </p>
+  </div>
 
-      <h2>Observações da Autora</h2>
-      <p>{character.observacoes_autora}</p>
-           </main>
-  );
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      ✨ Ligação Espiritual
+    </h2>
+
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.ligacao_espiritual}
+    </p>
+  </div>
+</div>
+
+     <div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit,minmax(400px,1fr))",
+    gap: "20px",
+    marginBottom: "30px",
+  }}
+>
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      🎯 Objetivo na História
+    </h2>
+
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.objetivo_historia}
+    </p>
+  </div>
+
+  <div
+    style={{
+      background:
+        "linear-gradient(180deg,#1b2540,#111827)",
+      border:
+        "1px solid rgba(212,175,55,.25)",
+      borderRadius: "20px",
+      padding: "25px",
+      color: "#fff",
+    }}
+  >
+    <h2
+      style={{
+        color: "#d4af37",
+        marginBottom: "15px",
+      }}
+    >
+      ⚠ Nunca Deve Acontecer
+    </h2>
+
+    <p
+      style={{
+        lineHeight: "1.8",
+        fontSize: "16px",
+      }}
+    >
+      {character.nunca_deve_acontecer}
+    </p>
+  </div>
+</div>
+
+     <div
+  style={{
+    background:
+      "linear-gradient(180deg,#1b2540,#111827)",
+    border:
+      "1px solid rgba(212,175,55,.25)",
+    borderRadius: "20px",
+    padding: "25px",
+    marginBottom: "30px",
+    color: "#fff",
+  }}
+>
+  <h2
+    style={{
+      color: "#d4af37",
+      marginBottom: "15px",
+    }}
+  >
+    🌟 Destino Planejado
+  </h2>
+
+  <p
+    style={{
+      lineHeight: "1.8",
+      fontSize: "16px",
+    }}
+  >
+    {character.destino_planejado}
+  </p>
+</div>
+
+    <div
+  style={{
+    background:
+      "linear-gradient(180deg,#1b2540,#111827)",
+    border:
+      "1px solid rgba(212,175,55,.25)",
+    borderRadius: "20px",
+    padding: "25px",
+    marginBottom: "30px",
+    color: "#fff",
+  }}
+>
+  <h2
+    style={{
+      color: "#d4af37",
+      marginBottom: "15px",
+    }}
+  >
+    📝 Observações da Autora
+  </h2>
+
+  <p
+    style={{
+      lineHeight: "1.8",
+      fontSize: "16px",
+    }}
+  >
+    {character.observacoes_autora}
+  </p>
+</div>
+
+</div>
+
+</main>
+);
 }

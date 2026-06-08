@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "../../lib/supabase";
 import { useRouter } from "next/navigation";
 
 export default function ImportBookPage() {
-  const [arquivo, setArquivo] = useState<File | null>(null);
+  const [arquivo, setArquivo] =
+    useState<File | null>(null);
+
+  const [status, setStatus] =
+    useState("Em andamento");
+
   const router = useRouter();
 
   async function enviarArquivo() {
@@ -14,68 +18,65 @@ export default function ImportBookPage() {
       return;
     }
 
-    const nomeArquivo =
-      Date.now() + "-" + arquivo.name;
+    const formData = new FormData();
 
-    const { error } = await supabase.storage
-      .from("livros")
-      .upload(nomeArquivo, arquivo);
+    formData.append(
+      "arquivo",
+      arquivo
+    );
 
-    if (error) {
-      alert(error.message);
-      return;
-    }
+    formData.append(
+      "status",
+      status
+    );
 
-    const tituloLivro = arquivo.name
-      .replace(".docx", "")
-      .replace(".pdf", "");
+    const response = await fetch(
+      "/api/process-book",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
-    const { error: bookError } = await supabase
-  .from("books")
-  .insert([
-    {
-      titulo: tituloLivro,
-      status: "Importado",
-      arquivo_url: nomeArquivo,
-    },
-  ]);
+    const resultado =
+  await response.json();
 
-    if (bookError) {
-      console.log(bookError);
+if (!resultado.sucesso) {
+  alert("Erro ao importar livro");
+  return;
+}
 
-      alert(
-        JSON.stringify(bookError, null, 2)
-      );
-
-      return;
-    }
-
-    alert("Livro importado com sucesso!");
-
-    router.push("/");
+router.push(
+  `/books/${resultado.livroId}`
+);
   }
 
   return (
     <main
       style={{
         padding: "40px",
+        maxWidth: "700px",
+        margin: "0 auto",
       }}
     >
-      <h1>📂 Importar Livro</h1>
+      <h1>
+        📂 Importar Livro
+      </h1>
 
       <p>
-        Envie um DOCX ou PDF para
-        transformar em Biblioteca Viva.
+        Envie um DOCX e escolha
+        o status da obra.
       </p>
 
       <br />
 
       <input
         type="file"
-        accept=".docx,.pdf"
+        accept=".docx"
         onChange={(e) =>
           setArquivo(
-            e.target.files?.[0] || null
+            e.target.files?.[0] ||
+              null
           )
         }
       />
@@ -83,8 +84,51 @@ export default function ImportBookPage() {
       <br />
       <br />
 
-      <button onClick={enviarArquivo}>
-        ⬆️ Enviar Arquivo
+      <label>
+        Status do Livro
+      </label>
+
+      <br />
+      <br />
+
+      <select
+        value={status}
+        onChange={(e) =>
+          setStatus(
+            e.target.value
+          )
+        }
+        style={{
+          padding: "10px",
+          width: "100%",
+        }}
+      >
+        <option>
+          Em construção
+        </option>
+
+        <option>
+          Em andamento
+        </option>
+
+        <option>
+          Concluído
+        </option>
+
+        <option>
+          Publicado
+        </option>
+      </select>
+
+      <br />
+      <br />
+
+      <button
+        onClick={
+          enviarArquivo
+        }
+      >
+        ⬆️ Importar Livro
       </button>
     </main>
   );

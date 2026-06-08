@@ -19,7 +19,7 @@ export default function NewBookPage() {
   const router = useRouter();
 
   const [titulo, setTitulo] = useState("");
-  const [status, setStatus] = useState("em construção");
+  const [status, setStatus] = useState("Em construção");
 
   async function salvarLivro() {
     const { error } = await supabase
@@ -63,9 +63,10 @@ export default function NewBookPage() {
           value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
-          <option>em construção</option>
-          <option>rascunho</option>
-          <option>concluído</option>
+          <option>Em construção</option>
+<option>Em andamento</option>
+<option>Concluído</option>
+<option>Publicado</option>
         </select>
 
         <button onClick={salvarLivro}>

@@ -14,6 +14,8 @@ export default function EditChapterPage() {
   const [numero, setNumero] = useState("");
   const [titulo, setTitulo] = useState("");
   const [conteudo, setConteudo] = useState("");
+  const [observacoes, setObservacoes] =
+    useState("");
 
   useEffect(() => {
     carregarCapitulo();
@@ -27,9 +29,19 @@ export default function EditChapterPage() {
       .single();
 
     if (data) {
-      setNumero(data.numero?.toString() || "");
+      setNumero(
+        data.numero?.toString() || ""
+      );
+
       setTitulo(data.titulo || "");
-      setConteudo(data.conteudo || "");
+
+      setConteudo(
+        data.conteudo || ""
+      );
+
+      setObservacoes(
+        data.observacoes || ""
+      );
     }
   }
 
@@ -38,8 +50,9 @@ export default function EditChapterPage() {
       .from("chapters")
       .update({
         numero: Number(numero),
-        titulo: titulo,
-        conteudo: conteudo,
+        titulo,
+        conteudo,
+        observacoes,
       })
       .eq("id", chapterId);
 
@@ -55,55 +68,180 @@ export default function EditChapterPage() {
     );
   }
 
+  const palavras =
+    conteudo
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean).length;
+
+  const caracteres =
+    conteudo.length;
+
   return (
     <main
       style={{
+        minHeight: "100vh",
+        background: "#0f172a",
         padding: "40px",
-        background: "#ffffff",
-        borderRadius: "20px",
       }}
     >
-      <h1>✏️ Editar Capítulo</h1>
-
-      <input
-        value={numero}
-        onChange={(e) => setNumero(e.target.value)}
-        placeholder="Número do Capítulo"
+      <div
         style={{
-          width: "100%",
-          padding: "12px",
-          marginBottom: "10px",
+          maxWidth: "1400px",
+          margin: "0 auto",
         }}
-      />
+      >
+        <h1
+          style={{
+            color: "#d4af37",
+            marginBottom: "30px",
+          }}
+        >
+          ✏️ Editor de Capítulo
+        </h1>
 
-      <input
-        value={titulo}
-        onChange={(e) => setTitulo(e.target.value)}
-        placeholder="Título"
-        style={{
-          width: "100%",
-          padding: "12px",
-          marginBottom: "20px",
-        }}
-      />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fit,minmax(220px,1fr))",
+            gap: "20px",
+            marginBottom: "30px",
+          }}
+        >
+          <div
+            style={{
+              background:
+                "linear-gradient(180deg,#1b2540,#111827)",
+              padding: "20px",
+              borderRadius: "20px",
+              border:
+                "1px solid rgba(212,175,55,.25)",
+              color: "#fff",
+            }}
+          >
+            <h3>📝 Palavras</h3>
+            <p
+              style={{
+                fontSize: "32px",
+              }}
+            >
+              {palavras}
+            </p>
+          </div>
 
-      <textarea
-        value={conteudo}
-        onChange={(e) => setConteudo(e.target.value)}
-        placeholder="Escreva seu capítulo aqui..."
-        rows={30}
-        style={{
-          width: "100%",
-          padding: "15px",
-          marginBottom: "20px",
-          fontSize: "16px",
-          lineHeight: "1.8",
-        }}
-      />
+          <div
+            style={{
+              background:
+                "linear-gradient(180deg,#1b2540,#111827)",
+              padding: "20px",
+              borderRadius: "20px",
+              border:
+                "1px solid rgba(212,175,55,.25)",
+              color: "#fff",
+            }}
+          >
+            <h3>🔤 Caracteres</h3>
+            <p
+              style={{
+                fontSize: "32px",
+              }}
+            >
+              {caracteres}
+            </p>
+          </div>
+        </div>
 
-      <button onClick={salvar}>
-        💾 Salvar Capítulo
-      </button>
+        <input
+          value={numero}
+          onChange={(e) =>
+            setNumero(e.target.value)
+          }
+          placeholder="Número do Capítulo"
+          style={{
+            width: "100%",
+            padding: "15px",
+            marginBottom: "15px",
+            borderRadius: "10px",
+          }}
+        />
+
+        <input
+          value={titulo}
+          onChange={(e) =>
+            setTitulo(e.target.value)
+          }
+          placeholder="Título"
+          style={{
+            width: "100%",
+            padding: "15px",
+            marginBottom: "20px",
+            borderRadius: "10px",
+          }}
+        />
+
+        <textarea
+          value={conteudo}
+          onChange={(e) =>
+            setConteudo(e.target.value)
+          }
+          placeholder="Escreva seu capítulo aqui..."
+          rows={45}
+          style={{
+            width: "100%",
+            padding: "20px",
+            marginBottom: "25px",
+            fontFamily:
+              "Arial, sans-serif",
+            fontSize: "12pt",
+            lineHeight: "1.8",
+            borderRadius: "15px",
+          }}
+        />
+
+        <h2
+          style={{
+            color: "#d4af37",
+            marginBottom: "10px",
+          }}
+        >
+          📝 Observações do Capítulo
+        </h2>
+
+        <textarea
+          value={observacoes}
+          onChange={(e) =>
+            setObservacoes(
+              e.target.value
+            )
+          }
+          rows={10}
+          placeholder="Pesquisas, ajustes, ideias, lembretes..."
+          style={{
+            width: "100%",
+            padding: "20px",
+            marginBottom: "30px",
+            borderRadius: "15px",
+            fontSize: "16px",
+          }}
+        />
+
+        <button
+          onClick={salvar}
+          style={{
+            background: "#d4af37",
+            color: "#111827",
+            border: "none",
+            padding:
+              "15px 30px",
+            borderRadius: "12px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          💾 Salvar Capítulo
+        </button>
+      </div>
     </main>
   );
 }
